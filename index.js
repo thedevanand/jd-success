@@ -25,13 +25,17 @@ client.on("messageCreate", async (message) => {
     for (let [string, attachment] of message.attachments.entries()) {
       if (!attachment || !attachment.contentType.startsWith("image/")) continue;
 
-      embeds.push(
-        new EmbedBuilder()
-          .setDescription("[Click Here to Join Roo Revenue](<https://whop.com/roorevenue>)")
-          .setImage(attachment.url)
-          .setColor(0xfafafa)
-          .setFooter({ text: `${client.user.displayName} | Success`, iconURL: client.user.displayAvatarURL() })
-      )
+      let embed = new EmbedBuilder()
+        .setDescription("[Click Here to Join Roo Revenue](<https://whop.com/roorevenue>)")
+        .setImage(attachment.url)
+        .setColor(0xfafafa)
+        .setFooter({ text: `${client.user.displayName} | Success`, iconURL: client.user.displayAvatarURL() })
+      
+      if (message.content !== "") {
+        embed.setDescription(message.content)
+      }
+
+      embeds.push(embed)
     }
 
     const targetChannel = client.channels.cache.get(targetChannelId);
