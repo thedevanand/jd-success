@@ -28,7 +28,6 @@ client.on("messageCreate", async (message) => {
       let description = "### [Click Here to Join Roo Revenue](<https://whop.com/roorevenue>)\n"
       
       let embed = new EmbedBuilder()
-        .setDescription()
         .setImage(attachment.url)
         .setColor(0xfafafa)
         .setFooter({ text: `${client.user.displayName} | Success`, iconURL: client.user.displayAvatarURL() })
@@ -42,7 +41,7 @@ client.on("messageCreate", async (message) => {
     }
 
     const targetChannel = client.channels.cache.get(targetChannelId);
-    if (targetChannel) {
+    if (targetChannel && embeds.length) {
         await targetChannel.send({ embeds });
     }
 });
