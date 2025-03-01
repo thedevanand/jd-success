@@ -25,16 +25,19 @@ client.on("messageCreate", async (message) => {
     for (let [string, attachment] of message.attachments.entries()) {
       if (!attachment || !attachment.contentType.startsWith("image/")) continue;
 
+      let description = "### [Click Here to Join Roo Revenue](<https://whop.com/roorevenue>)\n"
+      
       let embed = new EmbedBuilder()
-        .setDescription("[Click Here to Join Roo Revenue](<https://whop.com/roorevenue>)")
+        .setDescription()
         .setImage(attachment.url)
         .setColor(0xfafafa)
         .setFooter({ text: `${client.user.displayName} | Success`, iconURL: client.user.displayAvatarURL() })
       
       if (message.content !== "") {
-        embed.setDescription(message.content)
+        description += message.content
       }
-
+      
+      embed.setDescription(description)
       embeds.push(embed)
     }
 
